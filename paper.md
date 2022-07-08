@@ -54,7 +54,7 @@
 **方法设计：**  
 PandaSync总体架构如下图所示：  
 <center>
-<img src="../image/1.png" style="zoom:50%;" />
+<img src="image/1.png" style="zoom:50%;" />
 </center>  
 
 PandaSync由三个功能模块组成：文件大小监视器、网络动态感知阈值器和同步方案选择器。  
@@ -69,13 +69,13 @@ PandaSync由三个功能模块组成：文件大小监视器、网络动态感�
 其余参数，如处理延迟、查询延迟是作者从实验中得到的：  
 
 <center>
-<img src="../image/2.png" style="zoom:50%;" />
+<img src="image/2.png" style="zoom:50%;" />
 </center>  
 
 再联立两者，得到网络动态阈值，即根据RTT确定出区分大小文件的阈值：  
 
 <center>
-<img src="../image/3.png" style="zoom:50%;" />
+<img src="image/3.png" style="zoom:50%;" />
 </center>  
 
 ---
@@ -83,7 +83,7 @@ PandaSync由三个功能模块组成：文件大小监视器、网络动态感�
 提出Full2Sync的小文件完全同步方法，考虑到同步性能仍依赖于网络延迟，所以作者将同步请求和同步数据合并在一起，这样就减少客户端和服务器的交互次数，最大限度地利用网络带宽。  
 
 <center>
-<img src="../image/4.png" style="zoom:50%;" />
+<img src="image/4.png" style="zoom:50%;" />
 </center>
 
 ---
@@ -171,7 +171,7 @@ NetSync的关键思想是：
 **方法设计：**  
 NetSync的总体架构如下图所示：  
 <center>
-<img src="../image/5.png" style="zoom:50%;" />
+<img src="image/5.png" style="zoom:50%;" />
 </center>
 
 - Chunker。
@@ -191,7 +191,7 @@ NetSync的总体架构如下图所示：
 一般工作流程概述（结合下图）：  
 
 <center>
-<img src="../image/7.png" style="zoom:50%;" />
+<img src="image/7.png" style="zoom:50%;" />
 </center>
 
 1. 首先，网络监控器探测网络状况并设置同步过程以获得最佳性能。
@@ -208,7 +208,7 @@ NetSync的总体架构如下图所示：
    作者研究发现，NetSync原型中，一旦弱哈希不匹配，则完全不用计算强哈希，所以原本的强哈希计算可以省略，上述的NetSync的一般流程就是新建的通信协议。
 3. 减少网络流量：
    <center>
-     <img src="../image/8.png" style="zoom:50%;" />
+     <img src="image/8.png" style="zoom:50%;" />
    </center>
    这是通过合并连续的几个弱哈希匹配块来实现的。
    在收到客户端的Checksum List之后，服务器端将服务器上的原文件f分割成若干块，并像客户端那样计算它们的弱哈希值。
@@ -219,12 +219,12 @@ NetSync的总体架构如下图所示：
 4. 网络自适应选择器：  
    由于网络带宽和同步参数之间的不匹配会降低数据同步的整体性能，所以有了该模块。下图是该模块：
    <center>
-   <img src="../image/9.png" style="zoom:50%;" />
+   <img src="image/9.png" style="zoom:50%;" />
    </center>
    
    - 网络感知模块：
    <center>
-   <img src="../image/10.png" style="zoom:50%;" />
+   <img src="image/10.png" style="zoom:50%;" />
    </center>
    简单来说，该模块是测试网络质量的，步骤如下：
    先生成一些随机数的数组，每个数组256kb或1MB；
@@ -236,7 +236,7 @@ NetSync的总体架构如下图所示：
      由于网络传输占同步延迟的很大一部分，所以要么减少传输的数据量，要么使用高带宽，作者使用的压缩以减少数据量。  
      引入压缩器后，网络传输时间如下：
      <center>
-     <img src="../image/11.png" style="zoom:50%;" />
+     <img src="image/11.png" style="zoom:50%;" />
      </center>
     Rx是压缩比，D是数据的原始大小，N是网络带宽，tcx(D)是压缩数据D的时间，tdx(D)是解压数据D的时间，tp是网络延迟（即往返时间RTT的一半）。
     
@@ -260,7 +260,7 @@ Silesia是一个被广泛认可的数据压缩数据集，涵盖常用的典型�
 **补充知识：**  
 1. 增量同步的经典算法rsync的原理：
 <center>
-<img src="../image/6.png" style="zoom:50%;" />
+<img src="image/6.png" style="zoom:50%;" />
 </center>
 假设rsync将修改后的文件f'，需要从客户端同步到服务器，有以下3个步骤：  
 - 首先，客户端向服务器发送同步请求，服务器收到请求后，将服务器上的原文件f分割成固定大小的块，随后服务器计算弱而快的哈希值Adler32和强而慢的哈希值MD5，并发送各个块的指纹（统称为Checksum List）给客户端。
@@ -293,6 +293,7 @@ Silesia是一个被广泛认可的数据压缩数据集，涵盖常用的典型�
 4. 根据几个已发表的关于实际数据和基准数据集的研究，文件修改一般是在文件的开头、中间和结尾进行的，其分布分别为70%、10%和20%。
 
 ---
+
 
 ## 文章
 
